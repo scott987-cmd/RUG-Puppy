@@ -13,3 +13,25 @@
   .test-stats{grid-template-columns:1fr;gap:24px}
   .text-link,.code-card>a,footer>a:last-child{min-height:44px;display:inline-flex;align-items:center}
 }
+
+.video-section{
+  padding:clamp(48px,7vw,88px) 0 0;
+  scroll-margin-top:24px;
+}
+.video-heading{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:10px 24px;
+  margin-bottom:20px;
+}
+.video-heading h2,.video-heading .text-link{margin:0}
+.intro-video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  border-radius:clamp(12px,2vw,24px);
+  background:var(--ink);
+}
