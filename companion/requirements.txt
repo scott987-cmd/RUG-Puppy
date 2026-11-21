@@ -1,0 +1,13 @@
+# Direct runtime versions verified on Apple Silicon / Python 3.11.
+fastapi==0.141.1
+uvicorn==0.53.0
+websockets==17.1
+pydantic==2.13.5
+pillow==12.3.0
+numpy==2.4.6
+python-multipart==0.0.32
+mlx-vlm==0.7.2
+mlx-whisper==0.4.3
+cryptography==46.0.7
+opencv-python==5.0.0.93
+sherpa-onnx==1.13.8

@@ -1,0 +1,26 @@
+RUG Puppy
+
+This project incorporates code and bundled firmware resources from RIG-Omni.
+Copyright (c) 2024-2026 RIG-Omni Contributors.
+Upstream: https://github.com/LuwuDynamics/rig_omni
+Baseline: https://github.com/LuwuDynamics/rig_omni/commit/eb81c22c1603803bfb7686381bff823d7c9d119d
+License declared by upstream: Apache License, Version 2.0.
+See LICENSE and docs/UPSTREAM-README.md.
+
+RUG Puppy modifies the firmware for a local audio and control gateway, authenticated
+configuration, bounded motion, offline actions, camera and privacy behavior, and
+stationary play. It adds the Python companion gateway, iOS parent client, and tests.
+Modified upstream source files carry an inline change notice.
+
+components/78__esp-ml307 is a local override of the ESP Component Registry
+78/esp-ml307 3.6.5 release, licensed under Apache-2.0. Its original license,
+component checksums, and local changes are documented in that directory.
+https://components.espressif.com/components/78/esp-ml307/versions/3.6.5
+
+The bundled gifdec sources retain their public-domain notice in
+main/display/lvgl_display/gif/LICENSE.txt.
+
+Upstream firmware prompts, expressions, and WakeNet board resources included here
+are the original files from the baseline identified above. The NOTICE documents
+source provenance. Third-party dependencies and any assets obtained separately
+carry their respective terms. External MLX model weights are obtained separately.

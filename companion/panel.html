@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Puppy 家长中心</title>
+<style>
+  :root{color-scheme:light;--ink:#172a2b;--muted:#637474;--forest:#174f4b;--teal:#23766c;--mint:#e4f3eb;--cream:#f6f5ef;--line:#dce6de;--surface:#fff;--danger:#a53b3b;--shadow:0 12px 36px #173b3220}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+  [hidden]{display:none!important}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:var(--teal)}:focus-visible{outline:3px solid #e0a64b;outline-offset:2px}
+  .shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;align-self:start;min-height:100vh;padding:30px 18px;background:#153f3d;color:#e9f6ee;display:flex;flex-direction:column;gap:32px}.brand{display:flex;align-items:center;gap:12px;padding:4px 10px}.brand-mark{display:grid;place-items:center;width:40px;height:40px;background:#d9f0dc;color:#174f4b;border-radius:13px;font-size:22px}.brand strong{display:block;font-size:20px;letter-spacing:-.03em}.brand small{color:#b2d3c8;font-size:12px}.nav{display:grid;gap:4px}.nav a{display:flex;align-items:center;gap:12px;color:#c8e3da;text-decoration:none;padding:12px 15px;border-radius:12px;font-weight:600}.nav a:hover,.nav a[aria-current="page"]{background:#ffffff1b;color:white}.nav .nav-icon{width:20px;text-align:center;font-size:18px}.sidebar-foot{margin-top:auto;padding:16px 12px;border-top:1px solid #ffffff22;color:#b8d5c9;font-size:12px}
+  .main-shell{min-width:0;padding:34px clamp(20px,4vw,64px) 52px}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;max-width:1180px;margin:0 auto 24px}.eyebrow{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em}.topbar h1{font-size:clamp(29px,3vw,38px);letter-spacing:-.04em;margin:4px 0 3px;line-height:1.2}.topbar p{margin:0;color:var(--muted)}.pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:8px 13px;background:#e7ece9;border-radius:99px;color:#51625e;font-size:13px;font-weight:700}.pill::before{content:"";width:8px;height:8px;background:#8d9b96;border-radius:50%}.pill.online{background:#e0f3e7;color:#23714b}.pill.online::before{background:#2fb36c}.pill.offline{background:#f8e8e3;color:#9c4a3e}.pill.offline::before{background:#d26650}
+  .access-panel,main{max-width:1180px;margin:auto}.access-panel{margin-bottom:24px}.access-panel details{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 18px #143d2d0b}.access-panel summary{cursor:pointer;padding:14px 18px;font-weight:750;display:flex;justify-content:space-between;align-items:center;list-style:none}.access-panel summary::-webkit-details-marker{display:none}.access-panel summary::after{content:"⌄";color:var(--teal);font-size:20px}.access-panel details[open] summary::after{transform:rotate(180deg)}.access-panel summary span{margin-left:auto;margin-right:14px;font-size:12px;font-weight:500;color:var(--muted)}.access-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;padding:4px 18px 18px;border-top:1px solid var(--line)}
+  .workspace{display:block;animation:appear .2s ease}@keyframes appear{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}.page-intro{margin:0 0 22px;color:var(--muted)}.workspace>section,.workspace>div>section,.welcome,.metric,.quick-links{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 5px 22px #143d2d0a}.workspace>section,.workspace>div>section{padding:clamp(20px,2.5vw,30px);margin:0 0 18px}.workspace h2{margin:0 0 14px;font-size:21px;letter-spacing:-.025em}.workspace h3{font-size:16px}.workspace p{line-height:1.65}.workspace small,.workspace .hint{display:block;color:var(--muted);font-size:13px;line-height:1.6}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.section-heading h2{margin:0}
+  .welcome{position:relative;overflow:hidden;display:flex;justify-content:space-between;gap:18px;padding:27px 30px;margin-bottom:18px;background:linear-gradient(110deg,#e8f4e9,#f6f8ed 72%)}.welcome::after{content:"✳";position:absolute;right:22px;top:-45px;color:#ffffffad;font-size:190px;line-height:1}.welcome h2{font-size:25px;margin:3px 0 4px;position:relative;z-index:1}.welcome p{margin:0;max-width:590px;position:relative;z-index:1}.welcome .eyebrow{position:relative;z-index:1}.welcome a{position:relative;z-index:1;align-self:center;white-space:nowrap;text-decoration:none;background:var(--forest);color:white;border-radius:11px;padding:11px 15px;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}.metric{padding:21px 22px}.metric span{display:block;color:var(--muted);font-size:13px}.metric strong{display:block;font-size:24px;margin:3px 0;font-weight:800;letter-spacing:-.03em}.metric small{margin:0}.quick-links{padding:24px 28px;margin-top:18px}.quick-links h2{margin-bottom:12px}.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quick-grid a{text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-weight:700}.quick-grid a:hover{border-color:#9acbb6;background:#f0f9f3}.quick-grid span{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:2px}
+  label{display:block;margin:12px 0 5px;font-weight:650}input:not([type=checkbox]):not([type=range]):not([type=file]),select,textarea{width:min(100%,640px);min-height:43px;border:1px solid #c9d8d0;border-radius:11px;background:#fff;color:var(--ink);padding:10px 12px}input[type=file]{max-width:100%;padding:9px;border:1px dashed #b6c9bf;border-radius:10px}input[type=checkbox]{width:auto;margin-right:7px;accent-color:var(--teal)}input[type=range]{accent-color:var(--teal);max-width:290px;vertical-align:middle}textarea{min-height:110px;resize:vertical}button{border:1px solid #9dc4b4;background:#e6f4eb;color:#1c6255;border-radius:10px;padding:10px 14px;font-weight:700;margin:5px 6px 5px 0;min-height:42px}button:hover:not(:disabled){background:#d3ecde;border-color:#69ad90}button.stop,.danger{background:#fff0ee;color:var(--danger);border-color:#efc5be}button.stop:hover:not(:disabled),.danger:hover:not(:disabled){background:#fbe0da;border-color:#e7a69a}.access-grid button{margin-bottom:0}.access-grid small{display:block;color:var(--muted)}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;background:#f4f7f4;border:1px solid #e3ebe5;border-radius:11px;padding:12px 14px;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}.raw-state{margin-top:15px}.raw-state summary{cursor:pointer;color:var(--teal);font-weight:650}.raw-state pre{margin-bottom:0}.memory-value{white-space:pre-wrap;overflow-wrap:anywhere}.step{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0;padding:10px 12px;background:#f7faf7;border:1px solid var(--line);border-radius:11px}.step input{width:105px!important}.step select{width:150px!important}.photo-card{display:inline-block;vertical-align:top;max-width:260px;padding:10px;margin:7px 8px 7px 0;border:1px solid var(--line);border-radius:14px}.photo-card img{display:block;width:100%;border-radius:10px}.photo-card p{font-size:13px}.workspace details>summary{cursor:pointer}.footer{max-width:1180px;margin:35px auto 0;color:var(--muted);font-size:12px}
+  @media(max-width:900px){.shell{display:block}.sidebar{position:relative;min-height:0;padding:14px 16px 10px;gap:10px}.brand{padding:0}.brand-mark{width:34px;height:34px;font-size:18px}.brand strong{font-size:18px}.sidebar-foot{display:none}.nav{display:flex;overflow:auto;scrollbar-width:none;margin:0 -16px;padding:2px 16px}.nav::-webkit-scrollbar{display:none}.nav a{white-space:nowrap;padding:8px 10px;font-size:13px}.nav .nav-icon{font-size:15px;width:auto}.main-shell{padding:22px 18px 35px}.topbar h1{font-size:29px}}
+  @media(max-width:650px){.topbar{align-items:center}.topbar p{font-size:13px}.pill{font-size:12px;padding:6px 9px}.access-grid,.metrics,.quick-grid{grid-template-columns:1fr}.welcome{display:block;padding:23px}.welcome h2{font-size:22px}.welcome a{display:inline-block;margin-top:17px}.metrics{gap:9px}.metric{padding:15px 18px}.metric strong{font-size:21px}.workspace>section,.workspace>div>section{padding:19px;margin-bottom:12px}.step{align-items:flex-start}.photo-card{width:100%;max-width:none}}
+  pre:empty{display:none}
+  .identity-group{padding:21px 0;border-top:1px solid var(--line)}.identity-group:first-of-type{border-top:0}.identity-group h3{margin:0 0 14px!important;font-size:17px}.identity-group label{max-width:640px}.identity-group select{display:block;margin-bottom:10px}.identity-group input:not([type=checkbox]):not([type=file]){display:block}.identity-group>p[role=status]:empty,.identity-group>p[aria-live]:empty,#identityPanel>section>p[role=status]:empty{display:none}.identity-group>p[role=status],.identity-group>p[aria-live],#identityPanel>section>p[role=status]:not(:empty){padding:10px 13px;background:#f0f8f2;border-radius:10px;color:#27634b}.voice-group{background:#f6faf5;border:1px solid #d6eadd;border-radius:16px;padding:20px;margin:7px 0 18px}.voice-group button:first-of-type{background:var(--forest);border-color:var(--forest);color:white}.voice-group button:first-of-type:hover:not(:disabled){background:#0b3935}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" aria-label="主导航">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">🐾</span><div><strong>Puppy</strong><small>家长中心</small></div></div>
+    <nav class="nav" aria-label="功能分区">
+      <a href="#overview" data-nav="overview" aria-current="page"><span class="nav-icon" aria-hidden="true">◉</span>今日概览</a>
+      <a href="#family" data-nav="family"><span class="nav-icon" aria-hidden="true">♧</span>认识家人</a>
+      <a href="#companionship" data-nav="companionship"><span class="nav-icon" aria-hidden="true">✦</span>陪伴与学习</a>
+      <a href="#actions" data-nav="actions"><span class="nav-icon" aria-hidden="true">↗</span>动作与玩法</a>
+      <a href="#watch" data-nav="watch"><span class="nav-icon" aria-hidden="true">◫</span>拍照与巡看</a>
+      <a href="#settings" data-nav="settings"><span class="nav-icon" aria-hidden="true">⚙</span>设备设置</a>
+    </nav>
+    <div class="sidebar-foot">小狗语音使用访客会话。家长可选择成员查看个人记录。</div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div><span class="eyebrow">PUPPY COMPANION</span><h1 id="pageTitle">今日概览</h1><p id="pageDescription">先看状态，再决定今天和小狗做什么。</p></div><span class="pill" id="onlinePill" role="status">等待连接</span></header>
+    <div class="access-panel"><details id="connectionDetails" open><summary>家长访问 <span id="authHint">令牌只保留在当前页面</span></summary><div class="access-grid"><div><label for="token">家长令牌</label><input id="token" type="password" autocomplete="off" placeholder="输入后点刷新状态"><small>刷新页面后需重新输入，不保存在浏览器。</small></div><div><label for="device">设备 ID</label><input id="device" value="02:00:00:00:00:01"><button onclick="save()">保存设备 ID</button></div></div></details></div>
+    <main>
+      <div class="workspace" data-workspace="overview" id="overview">
+        <div class="welcome"><div><span class="eyebrow">家庭陪伴，从这里开始</span><h2>小狗今天怎么样？</h2><p>查看连接与声音状态。身份登记、英语练习和动作设置都在左侧分区。</p></div><a href="#family">录入声纹与人脸 ↗</a></div>
+        <div class="metrics"><div class="metric"><span>连接状态</span><strong id="metricOnline">待连接</strong><small id="metricObserved">输入令牌后刷新</small></div><div class="metric"><span>小狗名字</span><strong id="metricName">—</strong><small>来自设备当前状态</small></div><div class="metric"><span>声音与电量</span><strong id="metricVolume">—</strong><small id="metricBattery">电量仅为设备估计</small></div></div>
+        <section><div class="section-heading"><h2>设备状态</h2><button onclick="refreshDeviceStatus()">刷新状态</button></div><p class="hint" id="deviceSummary">输入家长令牌，读取 Puppy 的最新状态。</p><details class="raw-state"><summary>查看详细状态</summary><pre id="state">尚未读取</pre></details></section>
+        <section><h2>声音</h2><p class="hint">0 为静音；开机和动作不会自动播放叫声。</p><label for="volume">扬声器音量：<span id="volumeValue">0</span> / 60</label><input id="volume" type="range" min="0" max="60" value="0" oninput="$('volumeValue').textContent=this.value"><div><button onclick="setVolume()">设置音量</button><button class="stop" onclick="stopAudio()">停止当前语音</button></div><pre id="volumeResult"></pre><pre id="audioStopResult"></pre></section>
+        <div class="quick-links"><h2>常用入口</h2><div class="quick-grid"><a href="#family">认识家人<span>管理已登记的声纹与人脸</span></a><a href="#companionship">陪伴与学习<span>聊天、英语、故事和记忆</span></a><a href="#watch">拍照与巡看<span>按需拍照和定点计划</span></a></div></div>
+      </div>
+      <div class="workspace" data-workspace="family" id="family" hidden><p class="page-intro">管理家庭成员和已登记的样本。小狗的机身聊天使用访客会话。</p><div id="identityPanel"></div></div>
+      <div class="workspace" data-workspace="companionship" id="companionship" hidden>
+        <p class="page-intro">为小狗设置聊天、英语、故事和生活流程。文字聊天的成员由家长手动选择。</p>
+        <section><h2>和小狗聊天</h2><small>可以说“以后你叫豆豆”，确认后会持久保存。机身语音可在短时间内接着聊。</small><label for="person">家长手动确认成员</label><input id="person" placeholder="留空表示身份未知；例如 child-1"><small>文字聊天可由家长选定成员。Puppy 机身语音使用访客会话。</small><label for="message">文字</label><input id="message" placeholder="你叫什么名字？"><label for="mode">模式</label><select id="mode"><option value="chat">聊天</option><option value="english">学英语</option><option value="story">讲故事</option></select> <button onclick="chat()">发送</button> <button onclick="setVoiceMode()">将此模式用于 Puppy 语音</button><pre id="modeResult"></pre><pre id="chatResult"></pre></section>
+        <div id="learningPanel"></div><div id="routinePanel"></div>
+        <section><h2>记忆与英语练习</h2><small>使用上方家长确认的成员；课程回合、文字匹配次数和计时都不代表发音或掌握。学习前、隔天和一周后的结果仅由家长观察记录。新记忆保留原话；删除按整条表达进行。</small><button onclick="memories()">查看</button><div id="memories"></div><pre id="learning"></pre><div id="englishChecks"></div><pre id="story"></pre><button onclick="forgetStory()">重新开始此成员的故事</button><button class="danger" onclick="forgetPerson()">清除该成员的记忆、故事与词汇进度</button><small>今日练习时长与家长设置仍保留；身份样本请在身份管理中单独撤销。</small></section>
+      </div>
+      <div class="workspace" data-workspace="actions" id="actions" hidden>
+        <p class="page-intro">执行动作前确认小狗放在平稳位置，周围留有空间，现场可以随时停止。</p>
+        <section><h2>安全动作</h2><button onclick="act('wave')">挥手</button><button onclick="act('sit')">坐下</button><button onclick="act('stretch')">伸懒腰</button><button onclick="act('hug')">抱抱</button><button class="stop" onclick="stopMotion()">停止动作</button><pre id="actionResult"></pre></section>
+        <section><h2>自定义动作</h2><p class="hint">按顺序完成每个动作，再等待设定的时间。最多 12 步，可随时停止。</p><label for="actionName">名称</label><input id="actionName" placeholder="开心舞"><div id="stepList"></div><button onclick="addStep()">添加一步</button><button onclick="saveAction()">保存动作</button><button onclick="runAction()">执行</button><button onclick="loadActions()">读取已保存动作</button><button class="danger" onclick="deleteAction()">删除当前已保存动作</button><select id="savedActions" onchange="selectAction()"><option value="">选择已保存动作</option></select><pre id="customResult"></pre></section>
+        <div id="offlineLibraryPanel"></div><div id="actionDraftsPanel"></div><div id="gesturePanel"></div>
+      </div>
+      <div class="workspace" data-workspace="watch" id="watch" hidden><p class="page-intro">Puppy 在当前位置拍照和巡看，不会为了拍照自行移动。</p><section><h2>按需拍照</h2><button onclick="photo()">拍一张</button><button onclick="photos()">查看最近照片</button><pre id="photoResult"></pre><div id="gallery"></div></section><div id="patrolPanel"></div></div>
+      <div class="workspace" data-workspace="settings" id="settings" hidden><p class="page-intro">查看和修改 Puppy 与家中 Mac 的连接设置。保存后请核对设备状态。</p><div id="gatewayConfigPanel"></div></div>
+    </main>
+    <div class="footer">Puppy 家长中心 · 家庭局域网面板。家长令牌只保留在当前页面。</div>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pageInfo={overview:['今日概览','先看状态，再决定今天和小狗做什么。'],family:['认识家人','登记声纹和人脸，管理家庭成员身份。'],companionship:['陪伴与学习','聊天、英语、故事、记忆和生活小任务。'],actions:['动作与玩法','管理安全动作、离线玩法和孩子提出的新把戏。'],watch:['拍照与巡看','查看当前位置的照片，设置有边界的定点巡看。'],settings:['设备设置','管理 Puppy 与家中 Mac 的连接。']};
+function showWorkspace(){const hash=location.hash.slice(1),page=hash==='identityPanel'?'family':hash,selected=pageInfo[page]?page:'overview';for(const node of document.querySelectorAll('[data-workspace]'))node.hidden=node.dataset.workspace!==selected;for(const link of document.querySelectorAll('[data-nav]')){if(link.dataset.nav===selected)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current')}$('pageTitle').textContent=pageInfo[selected][0];$('pageDescription').textContent=pageInfo[selected][1];if(hash==='identityPanel')requestAnimationFrame(()=>$('identityPanel').scrollIntoView());else window.scrollTo(0,0)}
+addEventListener('hashchange',showWorkspace);showWorkspace();
+let sessionId=sessionStorage.getItem('puppy-chat-session');
+if(!sessionId){const bytes=crypto.getRandomValues(new Uint8Array(16));sessionId=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');sessionStorage.setItem('puppy-chat-session',sessionId)}
+// Remove tokens saved by older panel versions; never persist the current one.
+localStorage.removeItem('puppy-parent-token');
+$('device').value=localStorage.getItem('puppy-device-id')||$('device').value;
+function save(){localStorage.setItem('puppy-device-id',$('device').value)}
+async function api(route,method='GET',body){save();const response=await fetch(route,{method,headers:{'Authorization':'Bearer '+$('token').value,'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});const data=await response.json();if(!response.ok)throw Error(data.detail||response.status);return data}
+async function show(target,work){$(target).textContent='正在处理…';try{$(target).textContent=JSON.stringify(await work(),null,2)}catch(e){$(target).textContent=e.message}}
+async function refreshDeviceStatus(){
+  $('state').textContent='正在读取…';$('deviceSummary').textContent='正在确认设备状态…';
+  try{
+    const data=await api('/api/status'),device=data.devices[$('device').value],volume=device?.audio_speaker?.volume;
+    const fresh=Number.isFinite(device?.observed_at)&&Date.now()/1000-device.observed_at<90;
+    const online=Boolean(device?.online&&fresh);
+    $('onlinePill').textContent=online?'小狗在线':'设备离线';$('onlinePill').className='pill '+(online?'online':'offline');
+    $('metricOnline').textContent=online?'在线':'离线';
+    $('metricObserved').textContent=Number.isFinite(device?.observed_at)?'上报于 '+new Date(device.observed_at*1000).toLocaleTimeString():'暂无新鲜上报';
+    $('metricName').textContent=device?.pet_name||'—';
+    $('metricVolume').textContent=Number.isInteger(volume)?volume+' / 60':'—';
+    $('metricBattery').textContent=Number.isFinite(device?.battery?.level)?'电量估计 '+device.battery.level+'%':'电量估计暂不可用';
+    $('deviceSummary').textContent=online?'设备连接正常。电量是设备估计值，不能据此判断是否正在充电。':'当前没有新鲜的设备上报；请检查 Puppy、电源和家中 Wi-Fi。';
+    if(Number.isInteger(volume)){$('volume').value=volume;$('volumeValue').textContent=volume}
+    $('state').textContent=JSON.stringify(data,null,2);$('authHint').textContent='已验证当前访问';$('connectionDetails').open=false;
+  }catch(error){
+    $('onlinePill').textContent='需要连接';$('onlinePill').className='pill';$('metricOnline').textContent='待连接';$('metricObserved').textContent='请核对令牌与设备 ID';
+    $('deviceSummary').textContent='暂未读取到状态：'+error.message;$('state').textContent=error.message;$('authHint').textContent='请检查家长令牌';$('connectionDetails').open=true;
+  }
+}
+function act(name){show('actionResult',()=>watchAction(name))}
+function stopMotion(){show('actionResult',()=>api('/api/devices/'+encodeURIComponent($('device').value)+'/stop','POST'))}
+async function watchAction(name){const device=$('device').value;const submitted=await api('/api/devices/'+encodeURIComponent(device)+'/action/'+encodeURIComponent(name),'POST');if(!submitted.accepted)return submitted;const deadline=Date.now()+120000;while(Date.now()<deadline){await new Promise(resolve=>setTimeout(resolve,700));const state=(await api('/api/status')).actions[device];if(state&&state.state!=='running')return state;}return {state:'unknown',message:'暂未拿到最终状态，请刷新设备；不会自动重试动作'}}
+function setVolume(){show('volumeResult',()=>api('/api/devices/'+encodeURIComponent($('device').value)+'/volume','POST',{volume:Number($('volume').value)}))}
+function stopAudio(){show('audioStopResult',()=>api('/api/devices/'+encodeURIComponent($('device').value)+'/audio/stop','POST'))}
+const photoURLs=[];
+async function loadPhoto(id){const response=await fetch('/api/photo/'+encodeURIComponent(id),{headers:authHeaders()});if(!response.ok)throw Error('照片读取失败');const card=document.createElement('div');card.className='photo-card';const image=document.createElement('img');image.src=URL.createObjectURL(await response.blob());photoURLs.push(image.src);image.alt='Puppy 拍摄的照片';const button=document.createElement('button');button.textContent='让小狗看一看';const caption=document.createElement('p');button.onclick=async()=>{button.disabled=true;caption.textContent='小狗正在看照片…';try{const result=await api('/api/photo/'+encodeURIComponent(id)+'/describe','POST',{});caption.textContent=result.reply+(result.uncertain?'（有些地方看不清）':'')}catch(e){caption.textContent=e.message}finally{button.disabled=false}};const learn=document.createElement('button');learn.textContent='看图学英语';learn.onclick=async()=>{learn.disabled=true;try{const result=await api('/api/chat','POST',{device_id:$('device').value,person_id:$('person').value.trim()||null,session_id:sessionId,mode:'english',photo_id:id,text:'我们用这张照片玩找一找的英语游戏。'});caption.textContent=result.reply}catch(e){caption.textContent=e.message}finally{learn.disabled=false}};card.append(image,button,learn,caption);$('gallery').append(card)}
+function clearPhotos(){for(const url of photoURLs.splice(0))URL.revokeObjectURL(url);$('gallery').replaceChildren()}
+function authHeaders(){return {Authorization:'Bearer '+$('token').value}}
+
+async function photo(){try{const result=await api('/api/devices/'+encodeURIComponent($('device').value)+'/photo','POST');$('photoResult').textContent=JSON.stringify(result,null,2);if(result.photo_id)await loadPhoto(result.photo_id)}catch(e){$('photoResult').textContent=e.message}}
+async function photos(){try{const result=await api('/api/photos/'+encodeURIComponent($('device').value));$('photoResult').textContent=JSON.stringify(result,null,2);clearPhotos();for(const item of result.slice(0,5))await loadPhoto(item.photo_id)}catch(e){$('photoResult').textContent=e.message}}
+const actionChoices={wave:'挥手',sit:'坐下',stretch:'伸懒腰',hug:'抱抱',stop:'停止','':'只等待'};
+let steps=[{action:'wave',wait_ms:1200},{action:'sit',wait_ms:500}], savedActions={};
+function renderSteps(){$('stepList').replaceChildren();steps.forEach((step,index)=>{const row=document.createElement('div');row.className='step';const label=document.createElement('span');label.textContent='第 '+(index+1)+' 步';const select=document.createElement('select');for(const [value,text]of Object.entries(actionChoices)){const option=document.createElement('option');option.value=value;option.textContent=text;option.selected=value===(step.action||'');select.append(option)}select.onchange=()=>step.action=select.value||null;const input=document.createElement('input');input.type='number';input.min=0;input.max=3000;input.step=100;input.value=step.wait_ms||0;input.ariaLabel='动作后等待毫秒';input.onchange=()=>step.wait_ms=Number(input.value);const unit=document.createElement('span');unit.textContent='毫秒后下一步';const up=document.createElement('button');up.textContent='上移';up.disabled=index===0;up.onclick=()=>{[steps[index-1],steps[index]]=[steps[index],steps[index-1]];renderSteps()};const remove=document.createElement('button');remove.textContent='删除';remove.onclick=()=>{steps.splice(index,1);renderSteps()};row.append(label,select,input,unit,up,remove);$('stepList').append(row)})}
+function addStep(){if(steps.length>=12){$('customResult').textContent='最多 12 步';return}steps.push({action:'wave',wait_ms:0});renderSteps()}
+function saveAction(){show('customResult',async()=>{const result=await api('/api/actions','PUT',{name:$('actionName').value,steps});await loadActions();return result})}
+async function loadActions(){try{savedActions=await api('/api/actions');$('savedActions').replaceChildren(new Option('选择已保存动作',''));for(const name of Object.keys(savedActions))$('savedActions').add(new Option(name,name))}catch(e){$('customResult').textContent=e.message}}
+function deleteAction(){show('customResult',async()=>{const name=$('savedActions').value;if(!name||!savedActions[name])throw Error('请先读取并选择一个已保存动作');const result=await api('/api/actions/'+encodeURIComponent(name),'DELETE',{expected_steps:savedActions[name]});await loadActions();await actionDraftsUI.refresh();return result})}
+function selectAction(){const name=$('savedActions').value;if(!savedActions[name])return;$('actionName').value=name;steps=JSON.parse(JSON.stringify(savedActions[name]));renderSteps()}
+renderSteps();
+
+function runAction(){show('customResult',()=>watchAction($('actionName').value))}
+function setVoiceMode(){show('modeResult',()=>api('/api/devices/'+encodeURIComponent($('device').value)+'/mode','PUT',{mode:$('mode').value}))}
+function chat(){show('chatResult',async()=>{const result=await api('/api/chat','POST',{device_id:$('device').value,text:$('message').value,mode:$('mode').value,session_id:sessionId,person_id:$('person').value.trim()||null});if(result.draft)await actionDraftsUI.refresh();if(result.routine)await routineUI.refresh();return result})}
+function memoryRoute(){const person=$('person').value.trim();if(!person)throw Error('请先由家长确认成员');return '/api/memory/'+encodeURIComponent($('device').value)+'/'+encodeURIComponent(person)}
+function renderEnglishChecks(data,route,sameScope){
+  const root=$('englishChecks');root.replaceChildren();
+  const title=document.createElement('h3');title.textContent='家长观察 · 学习前与延迟复习';root.append(title);
+  const note=document.createElement('small');note.textContent='只记录你亲眼看到的指认、说出或生活使用；没有基线的旧词不能计算学习增益。';root.append(note);
+  const checks=new Map(data.english_checks.map(item=>[item.word+':'+item.checkpoint,item]));
+  const practiced=new Set(data.english.map(item=>item.word));
+  const optionSelect=(choices)=>{const select=document.createElement('select');for(const [value,label] of choices)select.add(new Option(label,value));return select};
+  const resultOptions=[['not_yet','暂时没做到'],['prompted','提醒后做到'],['independent','独立做到']];
+  const modalityOptions=[['pointed','指认'],['spoken','说出'],['used_in_context','生活中使用']];
+  const save=async(word,checkpoint,result,modality,button)=>{
+    if(!sameScope())return;button.disabled=true;
+    try{await api(route+'/english-checks','POST',{word,checkpoint,result,modality});if(sameScope())await memories()}
+    catch(error){if(sameScope())$('learning').textContent=error.message}
+    finally{button.disabled=false}
+  };
+  const fresh=data.english_words.filter(item=>!practiced.has(item.word)&&!checks.has(item.word+':baseline'));
+  if(fresh.length){const row=document.createElement('p');const words=optionSelect(fresh.map(item=>[item.word,item.word+' · '+item.meaning]));const outcome=optionSelect(resultOptions);const method=optionSelect(modalityOptions);const button=document.createElement('button');button.textContent='记录学习前起点';button.onclick=()=>save(words.value,'baseline',outcome.value,method.value,button);row.append('新词：',words,' 观察：',outcome,' 方式：',method,' ',button);root.append(row)}
+  for(const item of data.english){
+    const row=document.createElement('div');const label=document.createElement('p');label.textContent=item.word+' · 已在课程中出现 '+item.presentations+' 次（仅为接触记录）';row.append(label);
+    const baseline=checks.get(item.word+':baseline');const baselineText=document.createElement('small');baselineText.textContent=baseline?'学习前起点：'+({independent:'独立做到',prompted:'提醒后做到',not_yet:'暂时没做到'}[baseline.result])+'（家长记录）':'学习前未记录起点';row.append(baselineText);
+    if(baseline){const outcome=optionSelect(resultOptions);outcome.value=baseline.result;const method=optionSelect(modalityOptions);method.value=baseline.modality;const button=document.createElement('button');button.textContent='更正起点';button.onclick=()=>save(item.word,'baseline',outcome.value,method.value,button);row.append(' ',outcome,' ',method,' ',button)}
+    for(const plan of data.english_review_plan.filter(plan=>plan.word===item.word)){
+      const review=document.createElement('p');const existing=checks.get(item.word+':'+plan.checkpoint);const label=plan.checkpoint==='next_day'?'约隔天':'约一周';
+      review.append(label+' · '+(existing?'已记录：'+({independent:'独立做到',prompted:'提醒后做到',not_yet:'暂时没做到'}[existing.result]):plan.status==='upcoming'?'待 '+new Date(plan.due_at*1000).toLocaleDateString('zh-CN'):'可复习'));
+      if(plan.status!=='upcoming'){
+        const outcome=optionSelect(resultOptions);if(existing)outcome.value=existing.result;const method=optionSelect(modalityOptions);if(existing)method.value=existing.modality;const button=document.createElement('button');button.textContent=existing?'更正观察':'保存观察';button.onclick=()=>save(item.word,plan.checkpoint,outcome.value,method.value,button);review.append(' ',outcome,' ',method,' ',button)
+      }
+      row.append(review)
+    }
+    root.append(row)
+  }
+}
+let memoryReadGeneration=0;
+async function memories(){
+  const generation=++memoryReadGeneration;
+  const device=$('device').value,person=$('person').value.trim();
+  const sameScope=()=>$('device').value===device&&$('person').value.trim()===person;
+  const current=()=>generation===memoryReadGeneration&&sameScope();
+  try{
+    const route=memoryRoute();const result=await api(route);
+    if(!current())return;
+    $('memories').replaceChildren();
+    for(const entry of result.memories){
+      const row=document.createElement('p');const label=document.createElement('span');
+      label.className='memory-value';label.textContent=(entry.memory_key.startsWith('preference_statement:')?'原话：':'旧记录：')+entry.value+' ';
+      const button=document.createElement('button');button.textContent='删除整条';
+      button.onclick=async()=>{
+        if(!sameScope())return;
+        const deletion=++memoryReadGeneration;
+        try{
+          await api(route+'/'+encodeURIComponent(entry.memory_key),'DELETE');
+          if(sameScope())await memories();
+        }catch(e){if(deletion===memoryReadGeneration&&sameScope())$('learning').textContent=e.message}
+      };
+      row.append(label,button);$('memories').append(row);
+    }
+    $('learning').textContent=result.english.length?'词汇接触记录（不代表掌握）：'+result.english.map(item=>item.word+' '+item.presentations+' 次').join('；'):'还没有词汇练习记录';
+    renderEnglishChecks(result,route,sameScope);
+    $('story').textContent=result.story?('故事：'+result.story.title+' · 第 '+result.story.chapter+' 段\n'+result.story.summary):'还没有保存故事进度';
+  }catch(e){if(current())$('learning').textContent=e.message}
+}
+async function forgetStory(){
+  const generation=++memoryReadGeneration;
+  const device=$('device').value,person=$('person').value.trim();
+  const sameScope=()=>$('device').value===device&&$('person').value.trim()===person;
+  try{
+    if(!person)throw Error('请先选择成员');
+    await api('/api/story/'+encodeURIComponent(device)+'/'+encodeURIComponent(person),'DELETE');
+    if(sameScope())await memories();
+  }catch(e){if(generation===memoryReadGeneration&&sameScope())$('story').textContent=e.message}
+}
+async function forgetPerson(){
+  const generation=++memoryReadGeneration;
+  const device=$('device').value,person=$('person').value.trim();
+  const sameScope=()=>$('device').value===device&&$('person').value.trim()===person;
+  try{
+    await api(memoryRoute(),'DELETE');
+    if(sameScope())await memories();
+  }catch(e){if(generation===memoryReadGeneration&&sameScope())$('learning').textContent=e.message}
+}
+</script>
+<script src="/identity_panel.js"></script>
+<script src="/learning_panel.js"></script>
+<script src="/patrol_panel.js"></script>
+<script src="/gesture_panel.js"></script>
+<script src="/offline_library_panel.js"></script>
+<script src="/gateway_config_panel.js"></script>
+<script src="/routine_panel.js"></script>
+<script src="/action_drafts_panel.js"></script>
+<script>
+const identityUI=PuppyIdentityPanel.mount($('identityPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+const learningUI=PuppyLearningPanel.mount($('learningPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value,getPersonId:()=>$('person').value.trim()||null});
+const patrolUI=mountPatrolPanel($('patrolPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+const gestureUI=mountGesturePanel($('gesturePanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+const offlineLibraryUI=mountOfflineLibraryPanel($('offlineLibraryPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+const gatewayConfigUI=mountGatewayConfigPanel($('gatewayConfigPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+const routineUI=PuppyRoutinePanel.mount($('routinePanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value,getPersonId:()=>$('person').value.trim()||null});
+const actionDraftsUI=mountActionDraftsPanel($('actionDraftsPanel'),{fetch:(url,options={})=>fetch(url,{...options,headers:{...options.headers,...authHeaders()}}),getDeviceId:()=>$('device').value});
+for(const id of ['token','device'])$(id).addEventListener('change',()=>{identityUI.refresh();learningUI.refresh();patrolUI.refresh();gestureUI.refresh();offlineLibraryUI.refresh();gatewayConfigUI.refresh();routineUI.refresh();actionDraftsUI.refresh()});
+$('person').addEventListener('change',()=>{learningUI.refresh();routineUI.refresh()});
+</script>
+</body></html>

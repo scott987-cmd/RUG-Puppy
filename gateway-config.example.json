@@ -1,0 +1,9 @@
+{
+  "PUPPY_MODEL_PATH": "models/Qwen3.5-4B-4bit",
+  "PUPPY_TEXT_PROVIDER": "local",
+  "PUPPY_MODEL_PRELOAD": true,
+  "PUPPY_APPLE_ASR_ENABLED": false,
+  "PUPPY_STATIONARY_PLAY": true,
+  "PUPPY_HERMES_ENABLED": false,
+  "PUPPY_PORT": 8000
+}

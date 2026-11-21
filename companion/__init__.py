@@ -1,0 +1,1 @@
+"""Local Puppy companion service."""

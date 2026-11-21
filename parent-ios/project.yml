@@ -1,0 +1,56 @@
+name: PuppyParent
+options:
+  bundleIdPrefix: org.puppycompanion
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CURRENT_PROJECT_VERSION: "2"
+    MARKETING_VERSION: "1.0.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+targets:
+  PuppyParent:
+    type: application
+    platform: iOS
+    sources: [Sources, Assets.xcassets, PrivacyInfo.xcprivacy]
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: Puppy 家长
+        NSCameraUsageDescription: 仅在你主动录入家人人脸时使用手机摄像头；照片发送到家中 Mac 提取特征后不保存到相册或 iCloud。
+        NSMicrophoneUsageDescription: 仅在你主动录入家人声纹时使用手机麦克风；录音发送到家中 Mac 提取特征后不保留原始音频。
+        CFBundleIdentifier: org.puppycompanion.parent
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        UILaunchScreen: {}
+        LSSupportsOpeningDocumentsInPlace: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        "UISupportedInterfaceOrientations~ipad": [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: org.puppycompanion.parent
+  PuppyParentTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests]
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: PuppyParent
+  PuppyParentUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [UITests]
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: PuppyParent
+schemes:
+  PuppyParent:
+    build:
+      targets:
+        PuppyParent: all
+    test:
+      targets: [PuppyParentTests, PuppyParentUITests]
